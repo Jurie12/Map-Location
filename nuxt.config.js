@@ -2,6 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 
 export default {
   ssr: false,
+  target: 'static',
 
   head: {
     titleTemplate: '%s - guiban-qr-app',
@@ -47,7 +48,7 @@ export default {
         redirectUri: process.env.GOOGLE_CLIENT_URL,
         responseType: 'token id_token',
         scope: ['openid', 'profile', 'email'],
-        codeChallengeMethod: '', // disable PKCE for Google
+        codeChallengeMethod: '',
         token: {
           property: 'access_token',
           type: 'Bearer',
@@ -58,18 +59,23 @@ export default {
           userInfo: 'https://www.googleapis.com/oauth2/v3/userinfo'
         }
       },
-      github: {
-        clientId: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        redirectUri: process.env.GITHUB_REDIRECT_URI,
-        scope: ['read:user', 'user:email'],
-        responseType: 'code',
-        grantType: 'authorization_code',
-        codeChallengeMethod: '', // disable PKCE for GitHub
+      facebook: {
+        clientId: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+        redirectUri: process.env.FACEBOOK_REDIRECT_URI,
+        scope: ['public_profile', 'email'],
+        responseType: 'token',
         endpoints: {
-          authorization: 'https://github.com/login/oauth/authorize',
-          token: 'https://github.com/login/oauth/access_token',
-          userInfo: 'https://api.github.com/user'
+          authorization: 'https://www.facebook.com/v10.0/dialog/oauth',
+          userInfo: 'https://graph.facebook.com/me?fields=id,name,email,picture'
+        },
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: 1800
+        },
+        user: {
+          property: false
         }
       }
     }

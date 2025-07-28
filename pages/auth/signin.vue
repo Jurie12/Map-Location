@@ -44,15 +44,15 @@
       </v-btn>
 
       <v-btn
-        color="black"
+        color="blue darken-4"
         dark
         rounded
         block
         large
-        @click="signinWithGitHub"
+        @click="signinWithFacebook"
       >
-        <v-icon left>mdi-github</v-icon>
-        Continue with GitHub
+        <v-icon left>mdi-facebook</v-icon>
+        Continue with Facebook
       </v-btn>
     </v-card>
   </div>
@@ -71,8 +71,8 @@ export default {
     signinWithGoogle() {
       this.$auth.loginWith('google')
     },
-    signinWithGitHub() {
-      this.$auth.loginWith('github')
+    signinWithFacebook() {
+      this.$auth.loginWith('facebook')
     }
   }
 }
